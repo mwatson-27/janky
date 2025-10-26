@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>database</title>
+        <link rel=stylesheet href="{{ url_for('static', filename='main.css')}}">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">home</a></li>
+                <li><a href="/newdeckrender">create deck</a></li>
+                <li><a href="/list">search decks</a></li>
+                <li><a href="/upload_deck">upload deck</a></li>
+            </ul>
+        </nav>
+        <h1>Decks</h1>
+        <h2>copy and paste Deck Content into a .json file to upload</h2>
+        <!-- EDSTEM SOURCE MATERIAL THEFT FROM PRIOR ASSESSMENT -->
+        <table border = 1>
+            <thead>
+                <td>Deck title</td>
+                <td>Date created</td>
+                <td>Created by</td>
+                <td>Deck content</td>
+            </thead>
+
+            {% for row in rows %}
+                <tr>
+                    <td>{{row["deck_name"]}}</td>
+                    <td>{{row["date"]}}</td>
+                    <td>{{row["user"]}}</td>
+                    <td>{{row["deck_content"]}}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </body>
+</html>

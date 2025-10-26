@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<head>
+  <title>upload deck</title>
+  <link rel=stylesheet href="{{ url_for('static', filename='study.css')}}">
+</head>
+<body>
+    <div class="big-container">
+      <h1>{{filename}}</h1>
+
+      <div id="studied-card">
+        <h2 id="card-content">if you can see this, that is not good</h2>
+      </div>
+      
+      <div class="buttons-area">
+        <button id="back-button">back</button>
+        <button id="next-button">next</button>
+      </div> 
+      
+      
+      <form method="POST" action="{{ url_for('home') }}">
+      
+      <input type="hidden" name="deck_name" value="{{ filename }}">
+      <button type="submit">Finish</button>
+      </form>
+      
+    </div>
+
+    <script>
+      const deck = {{deck | tojson}}; //i couldnt work out how to put it in a separate file 
+      const cards = deck.flashcards
+
+      let index= 0
+      let card_flipped = false
+
+      const card_area = document.getElementById("studied-card")
+      const card_content = document.getElementById("card-content")
+      const back_button = document.getElementById("back-button")
+      const next_button = document.getElementById("next-button")
+
+      function load_card() {
+        const card = cards[index]
+        if (card_flipped) {
+          card_content.textContent = card.definition
+          console.log(card_content.textContent)
+        } else {
+          card_content.textContent = card.term
+          console.log(card_content.textContent)
+        }
+      }
+
+      card_area.addEventListener("click", () => {
+        if (card_flipped) {
+          card_flipped = false
+        } else {
+          card_flipped = true
+        }
+        load_card()
+        console.log(`card flipped: ${card_flipped}`)
+      })
+
+      
+      next_button.addEventListener("click", () => {
+        if ((index + 2) > cards.length) {
+          index = 0
+        } else {
+          index += 1
+        }
+
+        card_flipped = false
+        load_card()
+        console.log(`index: ${index}`)
+      })
+
+      back_button.addEventListener("click", () => {
+        if (index - 1 >= 0) {
+          index -= 1
+        } else {
+          index = cards.length - 1
+        }
+
+        card_flipped = false
+        load_card()
+        console.log(`index: ${index}`)
+
+      })
+
+      load_card()
+      console.log(card_content.textContent)
+      console.log(`index: ${index}`)
+      console.log(`card flipped: ${card_flipped}`)
+      console.log(`length: ${cards.length}`)
+    </script>
+    
+</body>
+

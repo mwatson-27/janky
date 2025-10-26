@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+  <title>janky</title>
+  <link rel=stylesheet href="{{ url_for('static', filename='main.css')}}">
+</head>
+<body>
+  <nav>
+      <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/newdeckrender">create deck</a></li>
+        <li><a href="/list">view available decks</a></li>
+        <li><a href="/upload_deck">upload deck</a></li>
+      </ul>
+  </nav>
+  <h1>welcome to janky</h1>
+  <div class="flex-container">
+    <a href="/newdeckrender">
+      <div>
+        <h2>Create A Deck</h2>
+      </div>
+    </a>
+    <a href="/list">
+      <div>
+        <h2>View available decks</h2>
+      </div>
+    </a>
+    <a href="/upload_deck">
+      <div>
+        <h2>Upload and study a deck</h2>
+      </div>
+    </a>
+  </div>
+</body>
